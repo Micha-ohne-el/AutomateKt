@@ -1,7 +1,7 @@
 interface Keyboard {
     fun press(key: Key)
 
-    companion object Primary : Keyboard by primaryKeyboard
+    companion object Primary : Keyboard by PrimaryKeyboard
 }
 
-expect val primaryKeyboard: Keyboard
+expect object PrimaryKeyboard: Keyboard
