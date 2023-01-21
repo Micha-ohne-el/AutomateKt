@@ -47,7 +47,13 @@ kotlin {
 
         val nativeMain by creating { dependsOn(commonMain) }
 
-        val linuxMain by creating { dependsOn(nativeMain) }
+        val linuxMain by creating {
+            dependsOn(nativeMain)
+
+            dependencies {
+                compileOnly(files("libs/x11.klib"))
+            }
+        }
         val linuxX64Main by getting { dependsOn(linuxMain) }
 
         val macosMain by creating { dependsOn(nativeMain) }

@@ -1,0 +1,5 @@
+package = platform.x11
+headers = X11/Xlib.h X11/Xutil.h X11/Xatom.h
+headerFilter = X11/*
+compilerOpts = -I/usr/include/ -I/usr/include/x86_64-linux-gnu/
+linkerOpts = -L/usr/lib/x86_64-linux-gnu/ -L/usr/lib/ -lX11
