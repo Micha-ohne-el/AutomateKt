@@ -7,5 +7,10 @@ open class Keyboard(
 
     fun release(key: Key) = driver.release(key)
 
+    fun fire(key: Key) {
+        driver.press(key)
+        driver.release(key)
+    }
+
     companion object Primary : Keyboard(primaryKeyboardDriver)
 }
