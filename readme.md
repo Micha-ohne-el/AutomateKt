@@ -12,3 +12,14 @@ Desktop Automation in Kotlin
 *   Clone the repo
 *   Run `./interop` in your terminal
 *   Build the project (`./gradlew build`)
+
+### Architecture
+#### Drivers
+As one of the goals of this project is maximum stability, everything must be covered by well-written, clean, automated tests.
+To achieve optimal testability in this rather IO-focused project, we use what we call “Drivers”.
+They are tiny classes that provide basic functionality for interacting with the hardware.
+They should be simple enough that testing is not required – you should be able to tell at a glance that they are correct.
+The real logic should be in separate classes which use such drivers.
+These must be fully tested, as they provide logic that makes using them painless compared to the drivers.  
+For a good example, see `commonMain/keyboard/Keyboard.kt` and `commonMain/keyboard/KeyboardDriver.kt`,
+as well as `commonTest/keyboard/KeyboardTest.kt` for the tests.
