@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@v3.3.0
 
       - name: Run platform-specific tests
-        run: ./gradlew linuxX64Test
+        run: ./gradlew linuxX64Test --info
 
       - name: Run JVM tests
-        run: ./gradlew jvmTest
+        run: ./gradlew jvmTest --info
 
   test_macos:
     name: Run unit tests on MacOS
@@ -24,10 +24,10 @@ jobs:
       - uses: actions/checkout@v3.3.0
 
       - name: Run platform-specific tests
-        run: ./gradlew macosX64Test
+        run: ./gradlew macosX64Test --info
 
       - name: Run JVM tests
-        run: ./gradlew jvmTest
+        run: ./gradlew jvmTest --info
 
   test_windows:
     name: Run unit tests on Windows
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v3.3.0
 
       - name: Run platform-specific tests
-        run: ./gradlew windowsX64Test
+        run: ./gradlew windowsX64Test --info
 
       - name: Run JVM tests
-        run: ./gradlew jvmTest
+        run: ./gradlew jvmTest --info
