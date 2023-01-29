@@ -1,4 +1,4 @@
-# AutomateKt
+# AutomateKt [![Unit Tests](https://github.com/Micha-ohne-el/AutomateKt/actions/workflows/unit-test.yml/badge.svg)](https://github.com/Micha-ohne-el/AutomateKt/actions/workflows/unit-test.yml)
 Desktop Automation in Kotlin
 
 ## Development Setup
