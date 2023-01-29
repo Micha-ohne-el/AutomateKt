@@ -25,7 +25,13 @@ repositories {
     Each target has both Main and Test source sets.
 */
 kotlin {
-    linuxX64()
+    linuxX64 {
+        compilations.getByName("main") {
+            cinterops.create("X11") {
+                defFile(file("src/linuxMain/resources/x11.def"))
+            }
+        }
+    }
     macosX64()
     macosArm64()
     mingwX64("windowsX64")

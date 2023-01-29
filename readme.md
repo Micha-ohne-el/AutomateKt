@@ -10,10 +10,7 @@ Desktop Automation in Kotlin
 
 ### Steps
 *   Clone the repo
-*   Run `./interop`* in your terminal
-*   Build the project (`./gradlew build`*)
-
-*: *On Windows, these scripts use the file extension `.bat`, so please run `interop.bat`, `gradlew.bat`, etc.*
+*   Build the project with `./gradlew build` (on Windows it's `gradlew.bat`)
 
 ### Architecture
 #### Drivers

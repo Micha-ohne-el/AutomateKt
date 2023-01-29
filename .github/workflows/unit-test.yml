@@ -11,9 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3.3.0
 
-      - name: Run interop script
-        run: ./interop
-
       - name: Run tests
         run: ./gradlew linuxX64Test
 
@@ -22,9 +19,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3.3.0
-
-      - name: Run interop script
-        run: ./interop
 
       - name: Run tests
         run: ./gradlew macosX64Test
@@ -35,9 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3.3.0
 
-      - name: Run interop script
-        run: ./interop
-
       - name: Run tests
         run: ./gradlew windowsX64Test
 
@@ -46,9 +37,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.3.0
-
-      - name: Run interop script
-        run: ./interop
 
       - name: Run tests
         run: ./gradlew jvmTest
