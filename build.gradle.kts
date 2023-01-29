@@ -36,6 +36,7 @@ kotlin {
     macosArm64()
     mingwX64("windowsX64")
     jvm {
+        withJava()
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
         }
