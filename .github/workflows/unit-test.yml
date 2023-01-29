@@ -1,0 +1,54 @@
+name: Run all unit tests
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test_linux:
+    name: Run unit tests on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Run interop script
+        run: ./interop
+
+      - name: Run tests
+        run: ./gradlew linuxX64Test
+
+  test_macos:
+    name: Run unit tests on MacOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Run interop script
+        run: ./interop
+
+      - name: Run tests
+        run: ./gradlew macosX64Test
+
+  test_windows:
+    name: Run unit tests on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Run interop script
+        run: ./interop
+
+      - name: Run tests
+        run: ./gradlew windowsX64Test
+
+  test_jvm:
+    name: Run unit tests on JVM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Run interop script
+        run: ./interop
+
+      - name: Run tests
+        run: ./gradlew jvmTest
