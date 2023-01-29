@@ -12,5 +12,5 @@ object AwtKeyboardDriver : KeyboardDriver {
     }
 
 
-    private val robot = Robot()
+    private val robot by lazy { Robot() }
 }
