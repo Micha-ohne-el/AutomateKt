@@ -1,8 +1,24 @@
 name: Unit Tests
 
 on:
-  - push
-  - pull_request
+  push:
+    paths:
+      - '**.kt'
+      - '**.kts'
+      - '**/*.def'
+      - '**/gradle.properties'
+      - '**/gradlew'
+      - '**/gradlew.bat'
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - '**.kt'
+      - '**.kts'
+      - '**/*.def'
+      - '**/gradle.properties'
+      - '**/gradlew'
+      - '**/gradlew.bat'
+      - '.github/workflows/**'
 
 jobs:
   test_linux:
