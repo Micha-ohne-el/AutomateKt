@@ -24,12 +24,18 @@ repositories {
 
     Each target has both Main and Test source sets.
 */
+
+object KlibPaths {
+    lateinit var x11: File
+}
+
 kotlin {
     linuxX64 {
         compilations.getByName("main") {
             cinterops.create("X11") {
                 defFile(file("src/linuxMain/resources/x11.def"))
             }
+            KlibPaths.x11 = output.resourcesDir/"cinterop"/"AutomateKt-cinterop-X11.klib"
         }
     }
     macosX64()
@@ -58,7 +64,7 @@ kotlin {
             dependsOn(nativeMain)
 
             dependencies {
-                compileOnly(files("libs/x11.klib"))
+                compileOnly(files(KlibPaths.x11))
             }
         }
         val linuxX64Main by getting { dependsOn(linuxMain) }
@@ -92,3 +98,6 @@ kotlin {
         val windowsX64Test by getting { dependsOn(windowsTest) }
     }
 }
+
+
+operator fun File.div(other: String) = resolve(other)
