@@ -1,5 +1,5 @@
 plugins {
-	kotlin("multiplatform") version "1.8.0"
+	kotlin("multiplatform") version "1.9.20"
 
 	id("io.kotest.multiplatform") version "5.8.0"
 }

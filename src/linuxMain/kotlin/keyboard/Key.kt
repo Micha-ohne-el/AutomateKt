@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package keyboard
 
+import kotlinx.cinterop.ExperimentalForeignApi
 import platform.x11.*
 
 actual enum class Key(
