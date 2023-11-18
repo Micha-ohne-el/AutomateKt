@@ -1,81 +1,76 @@
 package keyboard
 
-import kotlin.test.Test
-import kotlin.test.assertContentEquals
+import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
 
-class KeyboardTest {
-	class Press {
-		@Test
-		fun `press calls press on driver`() {
-			val driver = SpyDriver()
-			val sut = Keyboard(driver)
+class KeyboardTest : DescribeSpec() {
+	init {
+		describe("press") {
+			it("calls press on driver") {
+				val driver = SpyDriver()
+				val sut = Keyboard(driver)
 
-			sut.press(Key.A)
+				sut.press(Key.A)
 
-			assertContentEquals(listOf(Key.A to true), driver.stateChanges)
+				driver.stateChanges shouldBe listOf(Key.A to true)
+			}
+
+			it("calls press on driver multiple times") {
+				val driver = SpyDriver()
+				val sut = Keyboard(driver)
+
+				sut.press(Key.A)
+				sut.press(Key.B)
+
+				driver.stateChanges shouldBe listOf(Key.A to true, Key.B to true)
+			}
 		}
 
-		@Test
-		fun `press calls press on driver multiple times`() {
-			val driver = SpyDriver()
-			val sut = Keyboard(driver)
+		describe("release") {
+			it("calls release on driver") {
+				val driver = SpyDriver()
+				val sut = Keyboard(driver)
 
-			sut.press(Key.A)
-			sut.press(Key.B)
+				sut.release(Key.A)
 
-			assertContentEquals(listOf(Key.A to true, Key.B to true), driver.stateChanges)
-		}
-	}
+				driver.stateChanges shouldBe listOf(Key.A to false)
+			}
 
-	class Release {
-		@Test
-		fun `release calls release on driver`() {
-			val driver = SpyDriver()
-			val sut = Keyboard(driver)
+			it("calls release on driver multiple times") {
+				val driver = SpyDriver()
+				val sut = Keyboard(driver)
 
-			sut.release(Key.A)
+				sut.release(Key.A)
+				sut.release(Key.B)
 
-			assertContentEquals(listOf(Key.A to false), driver.stateChanges)
+				driver.stateChanges shouldBe listOf(Key.A to false, Key.B to false)
+			}
 		}
 
-		@Test
-		fun `release calls release on driver multiple times`() {
-			val driver = SpyDriver()
-			val sut = Keyboard(driver)
+		describe("fire") {
+			it("calls press and release on driver") {
+				val driver = SpyDriver()
+				val sut = Keyboard(driver)
 
-			sut.release(Key.A)
-			sut.release(Key.B)
+				sut.fire(Key.A)
 
-			assertContentEquals(listOf(Key.A to false, Key.B to false), driver.stateChanges)
-		}
-	}
+				driver.stateChanges shouldBe listOf(Key.A to true, Key.A to false)
+			}
 
-	class Fire {
-		@Test
-		fun `fire calls press and release on driver`() {
-			val driver = SpyDriver()
-			val sut = Keyboard(driver)
+			it("calls press and release on driver in correct order") {
+				val driver = SpyDriver()
+				val sut = Keyboard(driver)
 
-			sut.fire(Key.A)
+				sut.fire(Key.A)
+				sut.fire(Key.B)
 
-			assertContentEquals(listOf(Key.A to true, Key.A to false), driver.stateChanges)
-		}
-
-		@Test
-		fun `fire calls press and release on driver in correct order`() {
-			val driver = SpyDriver()
-			val sut = Keyboard(driver)
-
-			sut.fire(Key.A)
-			sut.fire(Key.B)
-
-			assertContentEquals(
-				listOf(
+				driver.stateChanges shouldBe listOf(
 					Key.A to true, Key.A to false, Key.B to true, Key.B to false
-				), driver.stateChanges
-			)
+				)
+			}
 		}
 	}
+
 
 	private class SpyDriver : KeyboardDriver {
 		val stateChanges = mutableListOf<Pair<Key, Boolean>>()

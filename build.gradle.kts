@@ -1,5 +1,7 @@
 plugins {
 	kotlin("multiplatform") version "1.8.0"
+
+	id("io.kotest.multiplatform") version "5.8.0"
 }
 
 group = "moe.micha"
@@ -46,6 +48,12 @@ kotlin {
 		compilations.all {
 			kotlinOptions.jvmTarget = "1.8"
 		}
+
+		testRuns.all {
+			executionTask {
+				useJUnitPlatform()
+			}
+		}
 	}
 
 	sourceSets {
@@ -78,10 +86,20 @@ kotlin {
 
 		val commonTest by getting {
 			dependencies {
-				implementation(kotlin("test"))
+				implementation("io.kotest:kotest-framework-engine:5.8.0")
+				implementation("io.kotest:kotest-assertions-core:5.8.0")
+				implementation("io.kotest:kotest-property:5.8.0")
 
 				implementation("com.squareup.okio:okio-fakefilesystem:3.3.0")
 				implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+			}
+		}
+
+		val jvmTest by getting {
+			dependsOn(commonTest)
+
+			dependencies {
+				implementation("io.kotest:kotest-runner-junit5:5.8.0")
 			}
 		}
 
