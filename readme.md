@@ -1,6 +1,6 @@
-# AutomateKt [![Unit Tests](https://github.com/Micha-ohne-el/AutomateKt/actions/workflows/unit-test.yml/badge.svg)](https://github.com/Micha-ohne-el/AutomateKt/actions/workflows/unit-test.yml)
+[![CI status badge](https://img.shields.io/github/actions/workflow/status/Micha-ohne-el/AutomateKt/integration.yaml?label=CI)](https://github.com/Micha-ohne-el/AutomateKt/actions/workflows/integration.yaml)
 
-Desktop Automation in Kotlin
+# Automatekt – Desktop Automation in Kotlin
 
 ## Development Setup
 
