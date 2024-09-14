@@ -1,0 +1,4 @@
+package = platform.linux.uinput
+
+headers = linux/uinput.h
+headerFilter = linux/uinput.h

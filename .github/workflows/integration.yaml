@@ -1,0 +1,82 @@
+name: Integration
+
+on: [ push, pull_request, workflow_dispatch, workflow_call ]
+
+jobs:
+  test_linux:
+    name: Run tests on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Run native tests
+        run: ./gradlew linuxX64Test --info
+
+      - name: Install Java for JVM tests
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      - name: Run JVM tests
+        run: ./gradlew jvmTest --info
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-linux
+          path: |
+            build/test-results/
+            build/reports/
+
+  #  test_macos:
+  #    name: Run tests on MacOS
+  #    runs-on: macos-latest
+  #    steps:
+  #      - uses: actions/checkout@v3.3.0
+  #
+  #      - name: Run native tests
+  #        run: ./gradlew macosX64Test --info
+  #
+  #      - name: Install Java for JVM tests
+  #        uses: actions/setup-java@v3
+  #        with:
+  #          distribution: 'zulu'
+  #          java-version: '21'
+  #
+  #      - name: Run JVM tests
+  #        run: ./gradlew jvmTest --info
+  #
+  #      - name: Publish test results
+  #        uses: actions/upload-artifact@v3
+  #        with:
+  #          name: test-results-macos
+  #          path: |
+  #            build/test-results/
+  #            build/reports/
+
+  test_windows:
+    name: Run tests on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+
+      - name: Run native tests
+        run: ./gradlew mingwX64Test --info
+
+      - name: Install Java for JVM tests
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      - name: Run JVM tests
+        run: ./gradlew jvmTest --info
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-windows
+          path: |
+            build/test-results/
+            build/reports/

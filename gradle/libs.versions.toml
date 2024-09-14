@@ -1,0 +1,16 @@
+[versions]
+kotlin = "2.0.0"
+nexus-publish = "2.0.0"
+kotest = "5.9.1"
+coroutines = "1.9.0"
+
+[libraries]
+nexus-publish = { group = "io.github.gradle-nexus.publish-plugin", name = "io.github.gradle-nexus.publish-plugin.gradle.plugin", version.ref = "nexus-publish" }
+kotest-framework = { group = "io.kotest", name = "kotest-framework-engine", version.ref = "kotest" }
+kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+
+[plugins]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotest = { id = "io.kotest.multiplatform", version.ref = "kotest" }

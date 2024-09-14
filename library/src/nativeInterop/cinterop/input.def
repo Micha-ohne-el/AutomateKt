@@ -1,0 +1,4 @@
+package = platform.linux.input
+
+headers = linux/input.h linux/input-event-codes.h
+headerFilter = linux/input.h linux/input-event-codes.h
