@@ -3,6 +3,7 @@ package input.keyboard
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
+import dev.mokkery.verify
 import dev.mokkery.verify.VerifyMode.Companion.exhaustiveOrder
 import dev.mokkery.verify.VerifyMode.Companion.not
 import dev.mokkery.verifySuspend
@@ -65,6 +66,19 @@ class KeyboardTests : DescribeSpec() {
 					driver.press(Key.B)
 					driver.release(Key.B)
 				}
+			}
+		}
+
+		describe("close") {
+			it("calls driver.close") {
+				val driver = mock<KeyboardDriver>(autoUnit)
+				val keyboard = Keyboard(driver)
+
+				verify(not) { driver.close() }
+
+				keyboard.close()
+
+				verify { driver.close() }
 			}
 		}
 	}
