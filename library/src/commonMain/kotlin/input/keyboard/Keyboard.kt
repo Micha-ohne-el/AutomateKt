@@ -15,6 +15,4 @@ open class Keyboard(
 	override fun close() {
 		driver.close()
 	}
-
-	companion object Primary : Keyboard(primaryKeyboardDriver)
 }
