@@ -3,6 +3,7 @@ kotlin = "2.0.0"
 nexus-publish = "2.0.0"
 kotest = "5.9.1"
 coroutines = "1.9.0"
+mokkery = "2.3.0"
 
 [libraries]
 nexus-publish = { group = "io.github.gradle-nexus.publish-plugin", name = "io.github.gradle-nexus.publish-plugin.gradle.plugin", version.ref = "nexus-publish" }
@@ -14,3 +15,4 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotest = { id = "io.kotest.multiplatform", version.ref = "kotest" }
+mokkery = { id = "dev.mokkery", version.ref = "mokkery" }

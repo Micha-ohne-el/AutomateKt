@@ -1,87 +1,71 @@
 package input.keyboard
 
+import dev.mokkery.MockMode.autoUnit
+import dev.mokkery.matcher.any
+import dev.mokkery.mock
+import dev.mokkery.verify.VerifyMode.Companion.exhaustiveOrder
+import dev.mokkery.verify.VerifyMode.Companion.not
+import dev.mokkery.verifySuspend
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.collections.shouldBeEmpty
-import io.kotest.matchers.shouldBe
 
 class KeyboardTests : DescribeSpec() {
 	init {
 		describe("press") {
 			it("calls driver.press") {
-				val driver = KeyboardDriverSpy()
+				val driver = mock<KeyboardDriver>(autoUnit)
 				val keyboard = Keyboard(driver)
 
-				driver.events.shouldBeEmpty()
+				verifySuspend(not) { driver.press(any()) }
 
 				keyboard.press(Key.A)
 
-				driver.events.size shouldBe 1
-				driver.events.last() shouldBe KeyboardDriverSpy.Event(Key.A, true)
+				verifySuspend { driver.press(Key.A) }
 
 				keyboard.press(Key.B)
 
-				driver.events.size shouldBe 2
-				driver.events.last() shouldBe KeyboardDriverSpy.Event(Key.B, true)
+				verifySuspend { driver.press(Key.B) }
 			}
 		}
 
 		describe("release") {
 			it("calls driver.release") {
-				val driver = KeyboardDriverSpy()
+				val driver = mock<KeyboardDriver>(autoUnit)
 				val keyboard = Keyboard(driver)
 
-				driver.events.shouldBeEmpty()
+				verifySuspend(not) { driver.release(any()) }
 
 				keyboard.release(Key.A)
 
-				driver.events.size shouldBe 1
-				driver.events.last() shouldBe KeyboardDriverSpy.Event(Key.A, false)
+				verifySuspend { driver.release(Key.A) }
 
 				keyboard.release(Key.B)
 
-				driver.events.size shouldBe 2
-				driver.events.last() shouldBe KeyboardDriverSpy.Event(Key.B, false)
+				verifySuspend { driver.release(Key.B) }
 			}
 		}
 
 		describe("fire") {
 			it("calls driver.press and driver.release") {
-				val driver = KeyboardDriverSpy()
+				val driver = mock<KeyboardDriver>(autoUnit)
 				val keyboard = Keyboard(driver)
 
-				driver.events.shouldBeEmpty()
+				verifySuspend(not) { driver.press(any()) }
+				verifySuspend(not) { driver.release(any()) }
 
 				keyboard.fire(Key.A)
 
-				driver.events.size shouldBe 2
-				driver.events.first() shouldBe KeyboardDriverSpy.Event(Key.A, true)
-				driver.events.last() shouldBe KeyboardDriverSpy.Event(Key.A, false)
+				verifySuspend(exhaustiveOrder) {
+					driver.press(Key.A)
+					driver.release(Key.A)
+				}
 
 				keyboard.fire(Key.B)
 
-				driver.events.size shouldBe 4
-				driver.events.drop(2).first() shouldBe KeyboardDriverSpy.Event(Key.B, true)
-				driver.events.drop(2).last() shouldBe KeyboardDriverSpy.Event(Key.B, false)
+				verifySuspend(exhaustiveOrder) {
+					driver.press(Key.B)
+					driver.release(Key.B)
+				}
 			}
 		}
-	}
-
-	private class KeyboardDriverSpy : KeyboardDriver {
-		val events = mutableListOf<Event>()
-
-		override suspend fun press(key: Key) {
-			events += Event(key, true)
-		}
-
-		override suspend fun release(key: Key) {
-			events += Event(key, false)
-		}
-
-		override fun close() {}
-
-		data class Event(
-			val key: Key,
-			val pressed: Boolean,
-		)
 	}
 }
