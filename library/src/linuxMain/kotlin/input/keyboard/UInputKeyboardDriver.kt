@@ -11,7 +11,6 @@ import kotlinx.cinterop.toKString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -47,7 +46,7 @@ class UInputKeyboardDriver : KeyboardDriver {
 		sendEvent(EV_SYN, SYN_REPORT, 0)
 	}
 
-	private suspend fun sendEvent(type: Int, code: Int, value: Int) = coroutineScope {
+	private suspend fun sendEvent(type: Int, code: Int, value: Int) {
 		setup.join()
 
 		memScoped {
