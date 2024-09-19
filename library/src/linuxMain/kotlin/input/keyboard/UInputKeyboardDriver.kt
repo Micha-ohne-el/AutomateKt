@@ -1,5 +1,6 @@
 package input.keyboard
 
+import internal.toInt
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.alloc
@@ -42,7 +43,7 @@ class UInputKeyboardDriver : KeyboardDriver {
 	private var setup: Job
 
 	private suspend fun sendKeyEvent(key: Key, pressed: Boolean) {
-		sendEvent(EV_KEY, key.code, if (pressed) 1 else 0)
+		sendEvent(EV_KEY, key.code, pressed.toInt())
 		sendEvent(EV_SYN, SYN_REPORT, 0)
 	}
 
