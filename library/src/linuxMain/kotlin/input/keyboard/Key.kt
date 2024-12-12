@@ -5,45 +5,45 @@ import platform.linux.input.*
 
 @Suppress("unused")
 @OptIn(ExperimentalForeignApi::class)
-actual enum class Key(
+actual sealed class Key(
 	val code: Int,
 ) {
-	A(KEY_A),
-	B(KEY_B),
-	C(KEY_C),
-	D(KEY_D),
-	E(KEY_E),
-	F(KEY_F),
-	G(KEY_G),
-	H(KEY_H),
-	I(KEY_I),
-	J(KEY_J),
-	K(KEY_K),
-	L(KEY_L),
-	M(KEY_M),
-	N(KEY_N),
-	O(KEY_O),
-	P(KEY_P),
-	Q(KEY_Q),
-	R(KEY_R),
-	S(KEY_S),
-	T(KEY_T),
-	U(KEY_U),
-	V(KEY_V),
-	W(KEY_W),
-	X(KEY_X),
-	Y(KEY_Y),
-	Z(KEY_Z),
-	Number0(KEY_0),
-	Number1(KEY_1),
-	Number2(KEY_2),
-	Number3(KEY_3),
-	Number4(KEY_4),
-	Number5(KEY_5),
-	Number6(KEY_6),
-	Number7(KEY_7),
-	Number8(KEY_8),
-	Number9(KEY_9),
-	Space(KEY_SPACE),
-	LeftShift(KEY_LEFTSHIFT);
+	actual object A : Key(KEY_A)
+	actual object B : Key(KEY_B)
+	actual object C : Key(KEY_C)
+	actual object D : Key(KEY_D)
+	actual object E : Key(KEY_E)
+	actual object F : Key(KEY_F)
+	actual object G : Key(KEY_G)
+	actual object H : Key(KEY_H)
+	actual object I : Key(KEY_I)
+	actual object J : Key(KEY_J)
+	actual object K : Key(KEY_K)
+	actual object L : Key(KEY_L)
+	actual object M : Key(KEY_M)
+	actual object N : Key(KEY_N)
+	actual object O : Key(KEY_O)
+	actual object P : Key(KEY_P)
+	actual object Q : Key(KEY_Q)
+	actual object R : Key(KEY_R)
+	actual object S : Key(KEY_S)
+	actual object T : Key(KEY_T)
+	actual object U : Key(KEY_U)
+	actual object V : Key(KEY_V)
+	actual object W : Key(KEY_W)
+	actual object X : Key(KEY_X)
+	actual object Y : Key(KEY_Y)
+	actual object Z : Key(KEY_Z)
+	actual object Number0 : Key(KEY_0)
+	actual object Number1 : Key(KEY_1)
+	actual object Number2 : Key(KEY_2)
+	actual object Number3 : Key(KEY_3)
+	actual object Number4 : Key(KEY_4)
+	actual object Number5 : Key(KEY_5)
+	actual object Number6 : Key(KEY_6)
+	actual object Number7 : Key(KEY_7)
+	actual object Number8 : Key(KEY_8)
+	actual object Number9 : Key(KEY_9)
+	actual object Space : Key(KEY_SPACE)
+	actual object LeftShift : Key(KEY_LEFTSHIFT)
 }
